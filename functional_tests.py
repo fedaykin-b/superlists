@@ -24,10 +24,10 @@ class NewVisitorTest(unittest.TestCase):
         # is tying fly-fishing lures)
 
         # When she hits enter, the page updates, and now the page lists
-        # "1: Buy peacok feathers" as an item in a to-do list
+        # "1: Buy peacock feathers" as an item in a to-do list
 
-        # There is still a text box invitting her t add another item. She
-        # enters "Use peacok feathers to make a fly" (Edith is very methodical)
+        # There is still a text box inviting her t add another item. She
+        # enters "Use peacock feathers to make a fly" (Edith is very methodical)
 
         # The pages updates again, and now shows both items on her list
 
