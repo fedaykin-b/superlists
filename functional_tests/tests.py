@@ -8,6 +8,7 @@ from django.test import LiveServerTestCase
 
 MAX_WAIT = 10
 
+
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
@@ -15,7 +16,7 @@ class NewVisitorTest(LiveServerTestCase):
 
     def tearDown(self):
         self.browser.quit()
-    
+
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
@@ -53,7 +54,7 @@ class NewVisitorTest(LiveServerTestCase):
         # "1: Buy peacock feathers" as an item in a to-do list
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1. Buy peacock feathers')
-        
+
         # There is still a text box inviting her t add another item. She
         # enters "Use peacock feathers to make a fly" (Edith is very methodical)
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -63,9 +64,9 @@ class NewVisitorTest(LiveServerTestCase):
         # The pages updates again, and now shows both items on her list
         self.wait_for_row_in_list_table('1. Buy peacock feathers')
         self.wait_for_row_in_list_table('2. Use peacock feathers to make a fly')
-        
+
         # Satisfied, she goes back to sleep
-    
+
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Edith starts a new list
         self.browser.get(self.live_server_url)
@@ -104,6 +105,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
         # Satisfied, they both go back to sleep
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
