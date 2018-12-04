@@ -1,6 +1,8 @@
+import subprocess
 import unittest
 import time
 
+import psutil
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
@@ -9,13 +11,34 @@ from django.test import LiveServerTestCase
 MAX_WAIT = 10
 
 
+class Terminal():
+
+    def __init__(self, os='Windows'):
+        if os == 'Windows':
+            self.cmd = 'start_server.bat'
+
+    def run(self):
+        self.process = subprocess.Popen(self.cmd)
+        return self
+
+    def kill(self):
+        process = psutil.Process(self.process.pid)
+        for proc in process.children(recursive=True):
+            proc.kill()
+        process.kill()
+
+
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Chrome()
+        self.terminal = Terminal()
+        self.terminal.run()
+        time.sleep(0.1)
 
     def tearDown(self):
         self.browser.quit()
+        self.terminal.kill()
 
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
